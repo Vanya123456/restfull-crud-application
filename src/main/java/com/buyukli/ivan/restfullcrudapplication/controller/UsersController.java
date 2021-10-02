@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class UsersController {
     }
 
     @PostMapping("/users")
-    public User createEmployee(User user) {
+    public User createEmployee(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
 
@@ -39,7 +40,7 @@ public class UsersController {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
         user.setFirstName(userDetails.getFirstName());
         user.setLastName((userDetails.getLastName()));
-        user.setPosition((userDetails.getEmail()));
+        user.setEmail((userDetails.getEmail()));
         return ResponseEntity.ok().body(user);
     }
 
