@@ -41,6 +41,7 @@ public class UsersController {
         user.setFirstName(userDetails.getFirstName());
         user.setLastName((userDetails.getLastName()));
         user.setEmail((userDetails.getEmail()));
+        userRepository.save(user);
         return ResponseEntity.ok().body(user);
     }
 
